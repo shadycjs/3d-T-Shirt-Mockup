@@ -2,16 +2,25 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import TShirtModel from "./components/TShirtModel";
+import { useState } from "react";
 
 function App() {
+
+  const [color, setColor] = useState("#ffffff"); // Color inicial: blanco
+
+  const handleColorChange = (event) => {
+    setColor(event.target.value); // Actualiza el estado del color
+  };
+
   return (
+    <>
     <Canvas camera={{ position: [0, 1.5, 3.5], fov: 45 }}>
       {/* Configuración de Luces */}
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
 
       {/* Modelo de la remera */}
-      <TShirtModel />
+      <TShirtModel color={color}/>
 
       {/* Controles interactivos */}
       <OrbitControls
@@ -22,8 +31,29 @@ function App() {
         maxDistance={4}
         minDistance={3}
         target={[0, -0.3 , -0.5]}
-      />
+        />
     </Canvas>
+
+    <div
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            background: "white",
+            padding: "10px",
+            border: "1px solid #ddd",
+            borderRadius: "5px",
+          }}
+          >
+          <label htmlFor="colorPicker">Selecciona un color:</label>
+          <input
+            id="colorPicker"
+            type="color"
+            value={color} // Color actual
+            onChange={handleColorChange} // Cambiar el estado del color
+            />
+        </div>
+        </>
   );
 }
 
