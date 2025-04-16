@@ -8,9 +8,19 @@ import PaletaColores from "./components/PaletaColores";
 function App() {
 
   const [color, setColor] = useState("#ffffff"); // Color inicial: blanco
+  const [logoTexture, setLogoTexture] = useState(null); // Logotipo cargado por el usuario
 
   const handleColorChange = (event) => {
     setColor(event.target.value); // Actualiza el estado del color
+  };
+
+  // Manejar la carga de logotipo
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const textureURL = URL.createObjectURL(file); // Convierte la imagen a URL
+      setLogoTexture(textureURL); // Almacenar la URL de la textura
+    }
   };
 
   return (
@@ -21,7 +31,7 @@ function App() {
       <directionalLight position={[5, 5, 5]} intensity={1} />
 
       {/* Modelo de la remera */}
-      <TShirtModel color={color}/>
+      <TShirtModel color={color} logoTexture={logoTexture}/>
 
       {/* Controles interactivos */}
       <OrbitControls
@@ -35,8 +45,25 @@ function App() {
         />
     </Canvas>
 
+        <div style={{ position: "absolute",
+                      top: 10,
+                      left: 250,
+                      background: "white",
+                      padding: "10px",
+                      border: "1px solid #ddd",
+                      borderRadius: "5px"}}>
+                  <label htmlFor="fileUpload">Cargar Logo:</label>
+                  <input
+                    id="fileUpload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                  />
+        </div>
+        
     <PaletaColores color={color}
                    handleColorChange={handleColorChange} />
+                   
         </>
   );
 }
