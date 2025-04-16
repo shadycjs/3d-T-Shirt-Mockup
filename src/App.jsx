@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import TShirtModel from "./components/TShirtModel";
 import { useState } from "react";
+import PaletaColores from "./components/PaletaColores";
 
 function App() {
 
@@ -34,25 +35,8 @@ function App() {
         />
     </Canvas>
 
-    <div
-          style={{
-            position: "absolute",
-            top: 10,
-            left: 10,
-            background: "white",
-            padding: "10px",
-            border: "1px solid #ddd",
-            borderRadius: "5px",
-          }}
-          >
-          <label htmlFor="colorPicker">Selecciona un color:</label>
-          <input
-            id="colorPicker"
-            type="color"
-            value={color} // Color actual
-            onChange={handleColorChange} // Cambiar el estado del color
-            />
-        </div>
+    <PaletaColores color={color}
+                   handleColorChange={handleColorChange} />
         </>
   );
 }

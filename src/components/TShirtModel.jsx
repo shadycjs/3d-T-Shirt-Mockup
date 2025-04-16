@@ -5,6 +5,10 @@ import { useEffect } from "react";
 const TShirtModel = ({ color }) => {
   const { scene } = useGLTF('src/assets/models/t_shirt.glb'); // Ruta del modelo
 
+  scene.traverse((child) => {
+    console.log(child.name); // Inspecciona los nombres de las mallas
+  });
+
   useEffect(() => {
     // Recorre las partes del modelo y actualiza el color del material
     scene.traverse((child) => {

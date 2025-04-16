@@ -1,13 +1,8 @@
 import React from 'react'
 import { useState } from "react";
 
-const PaletaColores = () => {
+const PaletaColores = ({color, handleColorChange}) => {
 
-  const [color, setColor] = useState("#ffffff"); // Color inicial: blanco
-
-  const handleColorChange = (event) => {
-    setColor(event.target.value); // Actualiza el estado del color
-  };
   return (
     <div
           style={{
